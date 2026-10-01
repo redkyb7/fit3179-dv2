@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Ten-Year Evolution of Australian Honeybee Sightings",
+    "subtitle": "Streamgraph showing relative distribution and volume expansion across states",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 700,
+  "height": 320,
+  "data": {
+    "url": "data/bee_state_yearly_counts.csv"
+  },
+  "transform": [{ "filter": "datum.year >= 2015 && datum.year <= 2025" }],
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Year",
+      "scale": { "zero": false },
+      "axis": { "format": "d", "tickCount": 10 }
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "observation_count",
+      "type": "quantitative",
+      "title": "Observation Flow",
+      "stack": "center",
+      "axis": null
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State",
+      "scale": {
+        "range": [
+          "#1f77b4",
+          "#ff7f0e",
+          "#2ca02c",
+          "#9467bd",
+          "#8c564b",
+          "#e377c2",
+          "#7f7f7f",
+          "#17becf"
+        ]
+      }
+    },
+    "tooltip": [
+      { "field": "state", "type": "nominal", "title": "State" },
+      { "field": "year", "type": "quantitative", "title": "Year" },
+      {
+        "field": "observation_count",
+        "type": "quantitative",
+        "title": "Sightings",
+        "format": ","
+      }
+    ]
+  }
+}

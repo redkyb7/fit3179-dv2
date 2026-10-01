@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Buzzing Stakes: Pollinators & Food Security in Australia | FIT3179 DV2
+    </title>
+
+    <!-- Vega Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: #f6f8fa;
+        color: #24292f;
+        margin: 0;
+        padding: 40px 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 980px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      /* Narrative Header */
+      header {
+        margin-bottom: 25px;
+        text-align: center;
+        padding-bottom: 10px;
+      }
+
+      header h1 {
+        font-size: 34px;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 10px;
+        letter-spacing: -0.6px;
+      }
+
+      header p.lead {
+        font-size: 17px;
+        color: #475569;
+        max-width: 780px;
+        margin: 0 auto 25px auto;
+        line-height: 1.6;
+      }
+
+      /* Storytelling Stat Banners */
+      .kpi-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 40px;
+      }
+
+      .kpi-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      }
+
+      .kpi-num {
+        font-size: 28px;
+        font-weight: 800;
+        color: #d95f02;
+        margin-bottom: 4px;
+      }
+
+      .kpi-label {
+        font-size: 13px;
+        color: #64748b;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-weight: 600;
+      }
+
+      /* Act / Chapter Headings */
+      .section-header {
+        margin-top: 45px;
+        margin-bottom: 20px;
+      }
+
+      .act-tag {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #d95f02;
+        margin-bottom: 4px;
+      }
+
+      .section-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 8px 0;
+      }
+
+      .section-intro {
+        font-size: 15px;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      /* Chart Cards */
+      .section-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 30px 36px;
+        margin-bottom: 28px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+        width: 100%;
+      }
+
+      .section-card h2 {
+        margin-top: 0;
+        font-size: 19px;
+        font-weight: 700;
+        color: #0f172a;
+        border-bottom: 2px solid #f1f5f9;
+        padding-bottom: 10px;
+      }
+
+      .section-card p.description {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #334155;
+        margin-top: 0;
+        margin-bottom: 20px;
+      }
+
+      .chart-box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Editorial Takeaways */
+      .callout {
+        margin-top: 20px;
+        background: #f8fafc;
+        border-left: 4px solid #0284c7;
+        padding: 12px 16px;
+        border-radius: 0 6px 6px 0;
+        font-size: 14px;
+        color: #1e293b;
+        line-height: 1.5;
+      }
+
+      .callout strong {
+        color: #0369a1;
+      }
+
+      /* Epilogue Card */
+      .epilogue-card {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        color: #ffffff;
+        border-radius: 10px;
+        padding: 36px 40px;
+        margin: 50px 0 30px 0;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      }
+
+      .epilogue-card h2 {
+        margin-top: 0;
+        font-size: 22px;
+        color: #f8fafc;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        padding-bottom: 12px;
+      }
+
+      .epilogue-card p {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #cbd5e1;
+        margin-bottom: 0;
+      }
+
+      footer {
+        text-align: center;
+        font-size: 13px;
+        color: #94a3b8;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e2e8f0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Buzzing Stakes: Pollinators & Food Security in Australia</h1>
+        <p class="lead">
+          One out of every three bites of food we eat relies on insect
+          pollination. Across Australia, wild and managed European honeybees
+          (<em>Apis mellifera</em>) quietly power billions in horticultural
+          output. What happens when these vital ecological networks are
+          strained?
+        </p>
+      </header>
+
+      <!-- STORY KPI HERO BAR -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-num">31,600+</div>
+          <div class="kpi-label">Observations Analyzed</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">$3.11 Billion</div>
+          <div class="kpi-label">Horticultural Value at Stake</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-num">55.9%</div>
+          <div class="kpi-label">Exposure in VIC & NSW</div>
+        </div>
+      </div>
+
+      <!-- ACT I -->
+      <div class="section-header">
+        <div class="act-tag">Act I: Spatial Dynamics</div>
+        <h2 class="section-title">
+          The Geography of Pollinators: Where Australia's Bees Live
+        </h2>
+        <p class="section-intro">
+          Mapping citizen encounters from continental distribution down to local
+          agricultural pockets.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 1: The Southeastern Stronghold (Choropleth Map)</h2>
+        <p class="description">
+          State aggregate totals reveal an intense geographic imbalance.
+          Victoria and New South Wales collectively account for nearly 15,000
+          recorded honeybee encounters, anchoring Australia's highest baseline
+          densities of foraging pollinators.
+        </p>
+        <div id="chart1" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Victoria represents only 3% of
+          Australia's landmass, yet generates over 28% of all national honeybee
+          records, mirroring its dense river valleys and temperate climate.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 2: Tracking the Swarm (Proportional Symbol Map)</h2>
+        <p class="description">
+          Moving past administrative borders to discrete GPS coordinates. Slide
+          across the timeline to witness how local pollination activity
+          concentrates in tight coastal fringes and river irrigation basins.
+        </p>
+        <div id="chart2" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Sighting clusters form uninterrupted
+          corridors along the Murray-Darling river basin and the southern
+          coastline, overlapping with regional orchard zones.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 3: Density Corridors (2D Spatial Heatmap)</h2>
+        <p class="description">
+          By binning occurrences into equal spatial cells, this heatmap filters
+          out urban recording bias to reveal genuine ecological density along
+          the Great Dividing Range and South-West agricultural zones.
+        </p>
+        <div id="chart3" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Over 70% of Australia's land area
+          registers virtually zero honeybee activity, underscoring that
+          agricultural pollination relies on narrow, geographically fragile
+          corridors.
+        </div>
+      </div>
+
+      <!-- ACT II -->
+      <div class="section-header">
+        <div class="act-tag">Act II: Temporal Rhythm</div>
+        <h2 class="section-title">
+          The Spring Rush: The Race Against Flowering Windows
+        </h2>
+        <p class="section-intro">
+          Tracking seasonal dormancy, spring surges, and long-term state ranking
+          shifts over the past decade.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 4: The Spring Awakening (Matrix Heatmap)</h2>
+        <p class="description">
+          Pollinator activity is governed by strict climatic calendar windows.
+          Across every Australian mainland state, bee sightings experience a
+          dramatic quiet during mid-winter (June–July) before surging
+          exponentially from September through November.
+        </p>
+        <div id="chart4" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> The sharp September surge coincides with
+          peak flowering for stone fruit, apples, and almonds—leaving zero
+          margin for weather anomalies or biological disruption during this
+          90-day window.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 5: A Decade of Flow (Volume Streamgraph)</h2>
+        <p class="description">
+          The expanding organic flow of annual observations highlights a
+          dramatic decade-long rise in pollinator tracking and citizen science
+          engagement across Australia's eastern states.
+        </p>
+        <div id="chart5" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> While observation volume has quadrupled
+          since 2015, Victoria and New South Wales maintain an unwavering
+          proportion of the nation's total flow.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 6: State Activity Hierarchy (Bump Chart)</h2>
+        <p class="description">
+          Tracking competitive state rankings from 2018 to 2025. Victoria firmly
+          anchors Rank #1 and New South Wales holds Rank #2 in every single
+          year, while Queensland and South Australia actively trade 3rd and 4th
+          place.
+        </p>
+        <div id="chart6" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Despite fluctuations in rainfall and
+          bushfire events, the macro hierarchy of pollinator presence has
+          remained remarkably rigid over the last 8 years.
+        </div>
+      </div>
+
+      <!-- ACT III -->
+      <div class="section-header">
+        <div class="act-tag">Act III: The Economic Stakes</div>
+        <h2 class="section-title">
+          Counting the Cost: Crop Vulnerability on the Farm
+        </h2>
+        <p class="section-intro">
+          Linking biological pollination dependency factors with official ABS
+          farm-gate financial values.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 7: The Vulnerability Hierarchy (Crop Value & Dependency)</h2>
+        <p class="description">
+          Not all crops are created equal. While broadacre cereals can rely on
+          wind, Australia's most profitable horticultural commodities require
+          insect vectors to achieve commercial fruit set.
+        </p>
+        <div id="chart7" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Apples ($647M), Almonds ($523M), and
+          Blueberries ($422M) are high-value crops with total biological
+          reliance on insect pollination.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 8: The Dependency Gap (Bullet Chart)</h2>
+        <p class="description">
+          Comparing total gross farm-gate revenue (light grey bar) directly
+          against the value attributable strictly to insect pollination (blue
+          bar). For 100% dependent crops, the two bars align completely.
+        </p>
+        <div id="chart8" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Over $1.8 Billion across just four crops
+          (Apples, Almonds, Avocados, and Blueberries) would vanish from farm
+          revenue without active honeybee hives.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 9: Multi-Dimensional Profiles (Parallel Coordinates)</h2>
+        <p class="description">
+          Tracing crops across three normalized dimensions: production volume,
+          economic return, and pollination reliance. Hover over any node to
+          inspect exact production tonnages, values, and insect dependency
+          percentages.
+        </p>
+        <div id="chart9" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Tree nuts and berries occupy a dangerous
+          profile: relatively compact physical tonnages paired with massive
+          monetary yields and extreme biological vulnerability.
+        </div>
+      </div>
+
+      <!-- ACT IV -->
+      <div class="section-header">
+        <div class="act-tag">Act IV: Food Security & State Exposure</div>
+        <h2 class="section-title">
+          The Domino Effect: Regional Food Security at Risk
+        </h2>
+        <p class="section-intro">
+          Evaluating the cumulative $3.11 Billion economic exposure across
+          Australian states.
+        </p>
+      </div>
+
+      <div class="section-card">
+        <h2>
+          Idiom 10: Building the $3.11 Billion Benchmark (Waterfall Chart)
+        </h2>
+        <p class="description">
+          Evaluating the sequential build-up of Australia's $3.11 Billion AUD
+          pollination-dependent horticultural value. Victoria ($891M) and New
+          South Wales ($849M) alone account for over 55% of the national total.
+        </p>
+        <div id="chart10" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Australia's pollination economy is
+          heavily concentrated: the top three states generate over $2.32 Billion
+          of the total $3.11 Billion national exposure.
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h2>Idiom 11: State Vulnerability Gap (Dumbbell Plot)</h2>
+        <p class="description">
+          Directly measuring the gap between total gross horticultural output
+          (slate circle) and the direct pollination-dependent share (blue
+          circle). In southern states like Victoria and Tasmania, the two dots
+          sit remarkably close together.
+        </p>
+        <div id="chart11" class="chart-box"></div>
+        <div class="callout">
+          <strong>Key Insight:</strong> Over 78% of Victoria's horticulture and
+          over 90% of Tasmania's high-value berry/apple economy is tied directly
+          to the health of pollinator populations.
+        </div>
+      </div>
+
+      <!-- STORY EPILOGUE -->
+      <div class="epilogue-card">
+        <h2>The Bottom Line: Why This Matters Today</h2>
+        <p>
+          Australia's horticultural economy is an intertwined ecosystem:
+          <strong>$3.11 Billion AUD</strong> of fresh fruit and nuts depends on
+          timely, healthy pollination cycles. With biosecurity threats like the
+          <em>Varroa destructor</em> mite now present on the continent,
+          protecting managed and wild honeybee populations is no longer just an
+          environmental concern—it is a cornerstone of national food security,
+          price stability, and regional agricultural livelihoods.
+        </p>
+      </div>
+
+      <footer>
+        Data Sources: Atlas of Living Australia (ALA Honeybee Occurrences
+        2015–2026) & Australian Bureau of Statistics (ABS Horticulture
+        Statistics Handbook 2022–23). Developed for FIT3179 Data Visualisation
+        2.
+      </footer>
+    </div>
+
+    <script>
+      // Embed all 11 chart specifications
+      vegaEmbed("#chart1", "js/chart1_choropleth.json", { actions: false });
+      vegaEmbed("#chart2", "js/chart2_symbol_map.json", { actions: false });
+      vegaEmbed("#chart3", "js/chart3_density_map.json", { actions: false });
+      vegaEmbed("#chart4", "js/chart4_seasonality_heatmap.json", {
+        actions: false,
+      });
+      vegaEmbed("#chart5", "js/chart5_streamgraph.json", { actions: false });
+      vegaEmbed("#chart6", "js/chart6_bump_chart.json", { actions: false });
+      vegaEmbed("#chart7", "js/chart7_crop_treemap.json", { actions: false });
+      vegaEmbed("#chart8", "js/chart8_bullet_chart.json", { actions: false });
+      vegaEmbed("#chart9", "js/chart9_parallel_coordinates.json", {
+        actions: false,
+      });
+      vegaEmbed("#chart10", "js/chart10_waterfall.json", { actions: false });
+      vegaEmbed("#chart11", "js/chart11_slopegraph.json", { actions: false });
+    </script>
+  </body>
+</html>

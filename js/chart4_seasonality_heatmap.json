@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Seasonal Pollination Windows: Monthly Activity by State",
+    "subtitle": "Observation counts reveal spring pollination peaks (Sep–Nov) vs. winter dormancy (Jun–Jul)",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": "container",
+  "height": 260,
+  "data": {
+    "url": "data/bee_observations_clean.csv"
+  },
+  "transform": [
+    {
+      "filter": "isValid(datum.month) && datum.month >= 1 && datum.month <= 12"
+    },
+    {
+      "calculate": "datum.month == 1 ? 'Jan' : datum.month == 2 ? 'Feb' : datum.month == 3 ? 'Mar' : datum.month == 4 ? 'Apr' : datum.month == 5 ? 'May' : datum.month == 6 ? 'Jun' : datum.month == 7 ? 'Jul' : datum.month == 8 ? 'Aug' : datum.month == 9 ? 'Sep' : datum.month == 10 ? 'Oct' : datum.month == 11 ? 'Nov' : 'Dec'",
+      "as": "month_str"
+    },
+    {
+      "aggregate": [{ "op": "count", "as": "monthly_sightings" }],
+      "groupby": ["state", "month", "month_str"]
+    }
+  ],
+  "mark": {
+    "type": "rect",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.5
+  },
+  "encoding": {
+    "x": {
+      "field": "month_str",
+      "type": "nominal",
+      "title": "Month",
+      "sort": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec"
+      ],
+      "axis": { "labelAngle": 0 }
+    },
+    "y": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State / Territory"
+    },
+    "color": {
+      "field": "monthly_sightings",
+      "type": "quantitative",
+      "title": "Sightings",
+      "scale": {
+        "scheme": "viridis"
+      }
+    },
+    "tooltip": [
+      { "field": "state", "type": "nominal", "title": "State" },
+      { "field": "month_str", "type": "nominal", "title": "Month" },
+      {
+        "field": "monthly_sightings",
+        "type": "quantitative",
+        "title": "Sightings",
+        "format": ","
+      }
+    ]
+  }
+}

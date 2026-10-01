@@ -1,0 +1,85 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Geographic Clusters of Honeybee Activity",
+    "subtitle": "Interactive year slider highlighting active pollination pockets",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "width": 700,
+  "height": 450,
+  "params": [
+    {
+      "name": "Year_Selection",
+      "value": 2024,
+      "bind": {
+        "input": "range",
+        "min": 2015,
+        "max": 2026,
+        "step": 1,
+        "name": "Select Year: "
+      }
+    }
+  ],
+  "projection": {
+    "type": "equirectangular"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "austates"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f4edea",
+        "stroke": "#c7b7ad",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/bee_observations_clean.csv"
+      },
+      "transform": [
+        { "filter": "datum.year == Year_Selection" },
+        {
+          "aggregate": [{ "op": "count", "as": "local_count" }],
+          "groupby": ["latitude", "longitude", "state"]
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.65,
+        "stroke": "#7f2704",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "longitude": { "field": "longitude", "type": "quantitative" },
+        "latitude": { "field": "latitude", "type": "quantitative" },
+        "size": {
+          "field": "local_count",
+          "type": "quantitative",
+          "title": "Local Sightings",
+          "scale": { "range": [20, 300] }
+        },
+        "color": {
+          "value": "#d94801"
+        },
+        "tooltip": [
+          { "field": "state", "type": "nominal", "title": "State" },
+          {
+            "field": "local_count",
+            "type": "quantitative",
+            "title": "Sightings in Area"
+          },
+          { "field": "latitude", "type": "quantitative", "format": ".2f" },
+          { "field": "longitude", "type": "quantitative", "format": ".2f" }
+        ]
+      }
+    }
+  ]
+}

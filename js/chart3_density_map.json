@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Spatial Heatmap of Pollinator Activity Density",
+    "subtitle": "Binned observation concentrations across Australia (2015–2026)",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "width": 700,
+  "height": 450,
+  "projection": {
+    "type": "equirectangular"
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+        "format": {
+          "type": "topojson",
+          "feature": "austates"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f4edea",
+        "stroke": "#c7b7ad",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {
+        "url": "data/bee_observations_clean.csv"
+      },
+      "transform": [
+        {
+          "bin": { "step": 0.75 },
+          "field": "longitude",
+          "as": ["bin_lon_start", "bin_lon_end"]
+        },
+        {
+          "bin": { "step": 0.75 },
+          "field": "latitude",
+          "as": ["bin_lat_start", "bin_lat_end"]
+        },
+        {
+          "aggregate": [{ "op": "count", "as": "density_count" }],
+          "groupby": ["bin_lon_start", "bin_lat_start"]
+        }
+      ],
+      "mark": {
+        "type": "square",
+        "size": 42,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "longitude": { "field": "bin_lon_start", "type": "quantitative" },
+        "latitude": { "field": "bin_lat_start", "type": "quantitative" },
+        "color": {
+          "field": "density_count",
+          "type": "quantitative",
+          "title": "Observation Density",
+          "scale": {
+            "type": "log",
+            "scheme": "magma"
+          }
+        },
+        "tooltip": [
+          {
+            "field": "density_count",
+            "type": "quantitative",
+            "title": "Sightings in Area",
+            "format": ","
+          },
+          {
+            "field": "bin_lat_start",
+            "type": "quantitative",
+            "title": "Lat",
+            "format": ".1f"
+          },
+          {
+            "field": "bin_lon_start",
+            "type": "quantitative",
+            "title": "Lon",
+            "format": ".1f"
+          }
+        ]
+      }
+    }
+  ]
+}

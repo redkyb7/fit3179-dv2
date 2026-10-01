@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Total Honeybee Sighting Density by State (2015–2026)",
+    "subtitle": "Source: Atlas of Living Australia (ALA)",
+    "fontSize": 16,
+    "subtitleFontSize": 12
+  },
+  "width": 700,
+  "height": 450,
+  "data": {
+    "url": "https://raw.githubusercontent.com/tonywr71/GeoJson-Data/master/australian-states.json",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.STATE_NAME",
+      "from": {
+        "data": {
+          "values": [
+            { "state": "Victoria", "total_sightings": 8868 },
+            { "state": "New South Wales", "total_sightings": 5948 },
+            { "state": "South Australia", "total_sightings": 3573 },
+            { "state": "Queensland", "total_sightings": 3281 },
+            { "state": "Western Australia", "total_sightings": 2634 },
+            {
+              "state": "Australian Capital Territory",
+              "total_sightings": 1182
+            },
+            { "state": "Tasmania", "total_sightings": 610 },
+            { "state": "Northern Territory", "total_sightings": 116 }
+          ]
+        },
+        "key": "state",
+        "fields": ["total_sightings"]
+      }
+    }
+  ],
+  "projection": {
+    "type": "equirectangular"
+  },
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.2
+  },
+  "encoding": {
+    "color": {
+      "field": "total_sightings",
+      "type": "quantitative",
+      "title": "Total Sightings",
+      "scale": {
+        "scheme": "oranges"
+      }
+    },
+    "tooltip": [
+      { "field": "properties.STATE_NAME", "type": "nominal", "title": "State" },
+      {
+        "field": "total_sightings",
+        "type": "quantitative",
+        "title": "Recorded Sightings",
+        "format": ","
+      }
+    ]
+  }
+}

@@ -1,0 +1,96 @@
+state,year,observation_count
+Australian Capital Territory,2015,13
+Australian Capital Territory,2016,19
+Australian Capital Territory,2017,37
+Australian Capital Territory,2018,80
+Australian Capital Territory,2019,57
+Australian Capital Territory,2020,107
+Australian Capital Territory,2021,92
+Australian Capital Territory,2022,91
+Australian Capital Territory,2023,203
+Australian Capital Territory,2024,225
+Australian Capital Territory,2025,166
+Australian Capital Territory,2026,92
+New South Wales,2015,330
+New South Wales,2016,170
+New South Wales,2017,385
+New South Wales,2018,284
+New South Wales,2019,372
+New South Wales,2020,575
+New South Wales,2021,515
+New South Wales,2022,513
+New South Wales,2023,623
+New South Wales,2024,809
+New South Wales,2025,730
+New South Wales,2026,642
+Northern Territory,2016,1
+Northern Territory,2017,2
+Northern Territory,2018,2
+Northern Territory,2019,3
+Northern Territory,2020,5
+Northern Territory,2021,12
+Northern Territory,2022,16
+Northern Territory,2023,13
+Northern Territory,2024,10
+Northern Territory,2025,37
+Northern Territory,2026,15
+Queensland,2015,8
+Queensland,2016,19
+Queensland,2017,41
+Queensland,2018,178
+Queensland,2019,167
+Queensland,2020,240
+Queensland,2021,388
+Queensland,2022,383
+Queensland,2023,379
+Queensland,2024,411
+Queensland,2025,655
+Queensland,2026,412
+South Australia,2015,7
+South Australia,2016,19
+South Australia,2017,35
+South Australia,2018,135
+South Australia,2019,276
+South Australia,2020,400
+South Australia,2021,494
+South Australia,2022,418
+South Australia,2023,363
+South Australia,2024,536
+South Australia,2025,533
+South Australia,2026,357
+Tasmania,2015,7
+Tasmania,2016,20
+Tasmania,2017,16
+Tasmania,2018,28
+Tasmania,2019,20
+Tasmania,2020,44
+Tasmania,2021,29
+Tasmania,2022,57
+Tasmania,2023,78
+Tasmania,2024,81
+Tasmania,2025,117
+Tasmania,2026,113
+Victoria,2015,138
+Victoria,2016,154
+Victoria,2017,183
+Victoria,2018,380
+Victoria,2019,399
+Victoria,2020,866
+Victoria,2021,1051
+Victoria,2022,870
+Victoria,2023,1017
+Victoria,2024,1254
+Victoria,2025,1607
+Victoria,2026,949
+Western Australia,2015,172
+Western Australia,2016,131
+Western Australia,2017,141
+Western Australia,2018,102
+Western Australia,2019,124
+Western Australia,2020,130
+Western Australia,2021,100
+Western Australia,2022,177
+Western Australia,2023,273
+Western Australia,2024,376
+Western Australia,2025,495
+Western Australia,2026,413

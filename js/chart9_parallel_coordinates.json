@@ -1,0 +1,105 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Multi-Dimensional Crop Vulnerability Profiles",
+    "subtitle": "Comparing Production (Tonnes), Gross Value ($M), and Pollination Dependency (%)",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 640,
+  "height": 340,
+  "data": {
+    "url": "data/crop_pollination_value.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        { "op": "sum", "field": "production_tonnes", "as": "production" },
+        { "op": "sum", "field": "farm_gate_value_m_aud", "as": "value" },
+        { "op": "mean", "field": "pollination_dependency", "as": "dependency" }
+      ],
+      "groupby": ["crop", "category"]
+    },
+    {
+      "fold": ["production", "value", "dependency"],
+      "as": ["metric", "raw_val"]
+    },
+    {
+      "joinaggregate": [
+        { "op": "min", "field": "raw_val", "as": "min_val" },
+        { "op": "max", "field": "raw_val", "as": "max_val" }
+      ],
+      "groupby": ["metric"]
+    },
+    {
+      "calculate": "(datum.raw_val - datum.min_val) / (datum.max_val - datum.min_val)",
+      "as": "norm_val"
+    },
+    {
+      "calculate": "datum.metric == 'production' ? '1. Production (Tonnes)' : datum.metric == 'value' ? '2. Gross Value ($M)' : '3. Dependency (%)'",
+      "as": "dimension"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.2,
+        "opacity": 0.65
+      },
+      "encoding": {
+        "x": {
+          "field": "dimension",
+          "type": "nominal",
+          "title": "Horticultural Dimension",
+          "axis": { "labelAngle": 0 }
+        },
+        "y": {
+          "field": "norm_val",
+          "type": "quantitative",
+          "title": "Normalized Index (0.0 – 1.0)",
+          "scale": { "domain": [-0.05, 1.05] },
+          "axis": { "tickCount": 5 }
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "title": "Category",
+          "scale": {
+            "domain": ["Fruit", "Nut"],
+            "range": ["#0072B2", "#D55E00"]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 11,
+            "labelFontSize": 10
+          }
+        },
+        "detail": { "field": "crop" }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 75,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": { "field": "dimension", "type": "nominal" },
+        "y": { "field": "norm_val", "type": "quantitative" },
+        "color": { "field": "category", "type": "nominal" },
+        "tooltip": [
+          { "field": "crop", "type": "nominal", "title": "Crop" },
+          { "field": "category", "type": "nominal", "title": "Category" },
+          { "field": "dimension", "type": "nominal", "title": "Dimension" },
+          {
+            "field": "raw_val",
+            "type": "quantitative",
+            "title": "Raw Value",
+            "format": ",.1f"
+          }
+        ]
+      }
+    }
+  ]
+}

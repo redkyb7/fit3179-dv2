@@ -1,0 +1,148 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Cumulative National Pollination-Dependent Value by State",
+    "subtitle": "Waterfall chart tracking sequential state contributions toward the $3.11B AUD national total",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 640,
+  "height": 350,
+  "data": {
+    "values": [
+      {
+        "state": "Victoria",
+        "value": 891.16,
+        "prev": 0.0,
+        "curr": 891.16,
+        "type": "State Contribution"
+      },
+      {
+        "state": "New South Wales",
+        "value": 848.64,
+        "prev": 891.16,
+        "curr": 1739.8,
+        "type": "State Contribution"
+      },
+      {
+        "state": "Queensland",
+        "value": 585.16,
+        "prev": 1739.8,
+        "curr": 2324.96,
+        "type": "State Contribution"
+      },
+      {
+        "state": "South Australia",
+        "value": 325.41,
+        "prev": 2324.96,
+        "curr": 2650.37,
+        "type": "State Contribution"
+      },
+      {
+        "state": "Western Australia",
+        "value": 224.93,
+        "prev": 2650.37,
+        "curr": 2875.3,
+        "type": "State Contribution"
+      },
+      {
+        "state": "Tasmania",
+        "value": 217.06,
+        "prev": 2875.3,
+        "curr": 3092.36,
+        "type": "State Contribution"
+      },
+      {
+        "state": "Northern Territory",
+        "value": 17.75,
+        "prev": 3092.36,
+        "curr": 3110.11,
+        "type": "State Contribution"
+      },
+      {
+        "state": "National Total",
+        "value": 3110.11,
+        "prev": 0.0,
+        "curr": 3110.11,
+        "type": "Total Aggregate"
+      }
+    ]
+  },
+  "encoding": {
+    "x": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State / National Benchmark",
+      "sort": [
+        "Victoria",
+        "New South Wales",
+        "Queensland",
+        "South Australia",
+        "Western Australia",
+        "Tasmania",
+        "Northern Territory",
+        "National Total"
+      ],
+      "axis": { "labelAngle": -25 }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "size": 36,
+        "cornerRadiusEnd": 3
+      },
+      "encoding": {
+        "y": {
+          "field": "prev",
+          "type": "quantitative",
+          "title": "Cumulative Pollination Value ($M AUD)"
+        },
+        "y2": { "field": "curr" },
+        "color": {
+          "field": "type",
+          "type": "nominal",
+          "title": "Metric Type",
+          "scale": {
+            "domain": ["State Contribution", "Total Aggregate"],
+            "range": ["#0284c7", "#d95f02"]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 11,
+            "labelFontSize": 10
+          }
+        },
+        "tooltip": [
+          { "field": "state", "type": "nominal", "title": "Region" },
+          {
+            "field": "value",
+            "type": "quantitative",
+            "title": "Contribution ($M)",
+            "format": "$,.2f"
+          },
+          {
+            "field": "curr",
+            "type": "quantitative",
+            "title": "Cumulative Benchmark ($M)",
+            "format": "$,.2f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "dy": -10,
+        "fontSize": 11,
+        "fontWeight": 600,
+        "color": "#333333"
+      },
+      "encoding": {
+        "y": { "field": "curr", "type": "quantitative" },
+        "text": { "field": "value", "type": "quantitative", "format": "$,.0f" }
+      }
+    }
+  ]
+}

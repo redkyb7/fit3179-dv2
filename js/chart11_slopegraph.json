@@ -1,0 +1,99 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "State Horticultural Vulnerability Gap",
+    "subtitle": "Dumbbell plot comparing gross horticultural output against the pollination-dependent share ($M AUD)",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 640,
+  "height": 330,
+  "data": {
+    "url": "data/crop_pollination_value.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        { "op": "sum", "field": "farm_gate_value_m_aud", "as": "gross_val" },
+        { "op": "sum", "field": "pollination_value_m_aud", "as": "poll_val" }
+      ],
+      "groupby": ["state"]
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "color": "#cbd5e1",
+        "strokeWidth": 4,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State / Territory",
+          "sort": { "field": "gross_val", "order": "descending" }
+        },
+        "x": {
+          "field": "poll_val",
+          "type": "quantitative",
+          "title": "Value ($M AUD)"
+        },
+        "x2": { "field": "gross_val" }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": ["gross_val", "poll_val"],
+          "as": ["metric_type", "val_amount"]
+        },
+        {
+          "calculate": "datum.metric_type == 'gross_val' ? 'Gross Farm Gate Value ($M)' : 'Pollination-Dependent Value ($M)'",
+          "as": "Metric"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "opacity": 1
+      },
+      "encoding": {
+        "y": {
+          "field": "state",
+          "type": "nominal",
+          "sort": { "field": "gross_val", "order": "descending" }
+        },
+        "x": { "field": "val_amount", "type": "quantitative" },
+        "color": {
+          "field": "Metric",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Gross Farm Gate Value ($M)",
+              "Pollination-Dependent Value ($M)"
+            ],
+            "range": ["#475569", "#0284c7"]
+          },
+          "legend": {
+            "orient": "right",
+            "title": "Value Metric",
+            "titleFontSize": 11,
+            "labelFontSize": 10
+          }
+        },
+        "tooltip": [
+          { "field": "state", "type": "nominal", "title": "State" },
+          { "field": "Metric", "type": "nominal", "title": "Metric" },
+          {
+            "field": "val_amount",
+            "type": "quantitative",
+            "title": "Value ($M)",
+            "format": "$,.2f"
+          }
+        ]
+      }
+    }
+  ]
+}

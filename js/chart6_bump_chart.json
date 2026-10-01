@@ -1,0 +1,290 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "State Activity Rank Transitions (2018–2025)",
+    "subtitle": "Victoria (#1) and NSW (#2) dominate; QLD and SA trade Ranks #3 & #4",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 640,
+  "height": 310,
+  "data": {
+    "values": [
+      { "year": 2018, "state": "Victoria", "rank": 1, "sightings": 379 },
+      { "year": 2019, "state": "Victoria", "rank": 1, "sightings": 399 },
+      { "year": 2020, "state": "Victoria", "rank": 1, "sightings": 866 },
+      { "year": 2021, "state": "Victoria", "rank": 1, "sightings": 1050 },
+      { "year": 2022, "state": "Victoria", "rank": 1, "sightings": 870 },
+      { "year": 2023, "state": "Victoria", "rank": 1, "sightings": 1017 },
+      { "year": 2024, "state": "Victoria", "rank": 1, "sightings": 1254 },
+      { "year": 2025, "state": "Victoria", "rank": 1, "sightings": 1606 },
+
+      { "year": 2018, "state": "New South Wales", "rank": 2, "sightings": 284 },
+      { "year": 2019, "state": "New South Wales", "rank": 2, "sightings": 372 },
+      { "year": 2020, "state": "New South Wales", "rank": 2, "sightings": 575 },
+      { "year": 2021, "state": "New South Wales", "rank": 2, "sightings": 515 },
+      { "year": 2022, "state": "New South Wales", "rank": 2, "sightings": 513 },
+      { "year": 2023, "state": "New South Wales", "rank": 2, "sightings": 623 },
+      { "year": 2024, "state": "New South Wales", "rank": 2, "sightings": 809 },
+      { "year": 2025, "state": "New South Wales", "rank": 2, "sightings": 730 },
+
+      { "year": 2018, "state": "Queensland", "rank": 3, "sightings": 177 },
+      { "year": 2019, "state": "Queensland", "rank": 4, "sightings": 167 },
+      { "year": 2020, "state": "Queensland", "rank": 4, "sightings": 240 },
+      { "year": 2021, "state": "Queensland", "rank": 4, "sightings": 388 },
+      { "year": 2022, "state": "Queensland", "rank": 4, "sightings": 383 },
+      { "year": 2023, "state": "Queensland", "rank": 3, "sightings": 379 },
+      { "year": 2024, "state": "Queensland", "rank": 4, "sightings": 411 },
+      { "year": 2025, "state": "Queensland", "rank": 3, "sightings": 655 },
+
+      { "year": 2018, "state": "South Australia", "rank": 4, "sightings": 135 },
+      { "year": 2019, "state": "South Australia", "rank": 3, "sightings": 276 },
+      { "year": 2020, "state": "South Australia", "rank": 3, "sightings": 400 },
+      { "year": 2021, "state": "South Australia", "rank": 3, "sightings": 494 },
+      { "year": 2022, "state": "South Australia", "rank": 3, "sightings": 418 },
+      { "year": 2023, "state": "South Australia", "rank": 4, "sightings": 363 },
+      { "year": 2024, "state": "South Australia", "rank": 3, "sightings": 536 },
+      { "year": 2025, "state": "South Australia", "rank": 4, "sightings": 533 },
+
+      {
+        "year": 2018,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 102
+      },
+      {
+        "year": 2019,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 124
+      },
+      {
+        "year": 2020,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 130
+      },
+      {
+        "year": 2021,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 100
+      },
+      {
+        "year": 2022,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 177
+      },
+      {
+        "year": 2023,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 273
+      },
+      {
+        "year": 2024,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 376
+      },
+      {
+        "year": 2025,
+        "state": "Western Australia",
+        "rank": 5,
+        "sightings": 495
+      },
+
+      {
+        "year": 2018,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 80
+      },
+      {
+        "year": 2019,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 57
+      },
+      {
+        "year": 2020,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 107
+      },
+      {
+        "year": 2021,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 92
+      },
+      {
+        "year": 2022,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 91
+      },
+      {
+        "year": 2023,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 203
+      },
+      {
+        "year": 2024,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 225
+      },
+      {
+        "year": 2025,
+        "state": "Australian Capital Territory",
+        "rank": 6,
+        "sightings": 166
+      },
+
+      { "year": 2018, "state": "Tasmania", "rank": 7, "sightings": 28 },
+      { "year": 2019, "state": "Tasmania", "rank": 7, "sightings": 20 },
+      { "year": 2020, "state": "Tasmania", "rank": 7, "sightings": 44 },
+      { "year": 2021, "state": "Tasmania", "rank": 7, "sightings": 29 },
+      { "year": 2022, "state": "Tasmania", "rank": 7, "sightings": 57 },
+      { "year": 2023, "state": "Tasmania", "rank": 7, "sightings": 78 },
+      { "year": 2024, "state": "Tasmania", "rank": 7, "sightings": 81 },
+      { "year": 2025, "state": "Tasmania", "rank": 7, "sightings": 117 },
+
+      {
+        "year": 2018,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 2
+      },
+      {
+        "year": 2019,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 3
+      },
+      {
+        "year": 2020,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 5
+      },
+      {
+        "year": 2021,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 12
+      },
+      {
+        "year": 2022,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 16
+      },
+      {
+        "year": 2023,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 13
+      },
+      {
+        "year": 2024,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 10
+      },
+      {
+        "year": 2025,
+        "state": "Northern Territory",
+        "rank": 8,
+        "sightings": 37
+      }
+    ]
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3.5,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0 }
+        },
+        "y": {
+          "field": "rank",
+          "type": "quantitative",
+          "title": "Rank (1 = Most Active State)",
+          "scale": { "domain": [8.5, 0.5] },
+          "axis": { "tickMinStep": 1, "values": [1, 2, 3, 4, 5, 6, 7, 8] }
+        },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "range": [
+              "#0072B2",
+              "#E69F00",
+              "#56B4E9",
+              "#9467bd",
+              "#e377c2",
+              "#332288",
+              "#d95f02",
+              "#7f7f7f"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "titleFontSize": 11,
+            "labelFontSize": 10
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "circle",
+        "size": 90,
+        "opacity": 1
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "rank", "type": "quantitative" },
+        "color": {
+          "field": "state",
+          "type": "nominal",
+          "scale": {
+            "range": [
+              "#0072B2",
+              "#E69F00",
+              "#56B4E9",
+              "#9467bd",
+              "#e377c2",
+              "#332288",
+              "#d95f02",
+              "#7f7f7f"
+            ]
+          }
+        },
+        "tooltip": [
+          { "field": "state", "type": "nominal", "title": "State" },
+          { "field": "year", "type": "ordinal", "title": "Year" },
+          { "field": "rank", "type": "quantitative", "title": "Rank" },
+          {
+            "field": "sightings",
+            "type": "quantitative",
+            "title": "Recorded Sightings",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ]
+}

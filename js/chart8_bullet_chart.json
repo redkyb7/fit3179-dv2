@@ -1,0 +1,102 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Gross Crop Value vs. Direct Pollination-Attributable Share",
+    "subtitle": "Comparison of total horticultural value against value directly reliant on insect pollination ($M AUD)",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 660,
+  "height": 380,
+  "data": {
+    "url": "data/crop_pollination_value.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "farm_gate_value_m_aud",
+          "as": "Gross Farm Gate Value ($M)"
+        },
+        {
+          "op": "sum",
+          "field": "pollination_value_m_aud",
+          "as": "Pollination-Dependent Share ($M)"
+        },
+        { "op": "mean", "field": "pollination_dependency", "as": "dependency" }
+      ],
+      "groupby": ["crop"]
+    },
+    {
+      "fold": [
+        "Gross Farm Gate Value ($M)",
+        "Pollination-Dependent Share ($M)"
+      ],
+      "as": ["Metric", "Value"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "y": {
+      "field": "crop",
+      "type": "nominal",
+      "title": "Crop",
+      "sort": "-x"
+    },
+    "x": {
+      "field": "Value",
+      "type": "quantitative",
+      "title": "Value ($M AUD)",
+      "stack": null
+    },
+    "size": {
+      "field": "Metric",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Gross Farm Gate Value ($M)",
+          "Pollination-Dependent Share ($M)"
+        ],
+        "range": [18, 10]
+      },
+      "legend": null
+    },
+    "color": {
+      "field": "Metric",
+      "type": "nominal",
+      "scale": {
+        "domain": [
+          "Gross Farm Gate Value ($M)",
+          "Pollination-Dependent Share ($M)"
+        ],
+        "range": ["#d1d5db", "#0284c7"]
+      },
+      "legend": {
+        "orient": "right",
+        "title": "Value Metric",
+        "titleFontSize": 11,
+        "labelFontSize": 10
+      }
+    },
+    "tooltip": [
+      { "field": "crop", "type": "nominal", "title": "Crop" },
+      { "field": "Metric", "type": "nominal", "title": "Metric" },
+      {
+        "field": "Value",
+        "type": "quantitative",
+        "title": "Value ($M)",
+        "format": "$,.1f"
+      },
+      {
+        "field": "dependency",
+        "type": "quantitative",
+        "title": "Insect Dependency",
+        "format": ".0%"
+      }
+    ]
+  }
+}

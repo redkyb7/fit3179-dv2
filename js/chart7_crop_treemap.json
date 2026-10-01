@@ -1,0 +1,83 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Economic Value & Pollination Dependency of Australian Horticulture",
+    "subtitle": "Bar height denotes gross farm gate value ($M); colour denotes insect pollination dependency",
+    "fontSize": 15,
+    "subtitleFontSize": 12
+  },
+  "width": 680,
+  "height": 340,
+  "data": {
+    "url": "data/crop_pollination_value.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        { "op": "sum", "field": "farm_gate_value_m_aud", "as": "total_value" },
+        { "op": "mean", "field": "pollination_dependency", "as": "dependency" },
+        {
+          "op": "sum",
+          "field": "pollination_value_m_aud",
+          "as": "at_risk_value"
+        }
+      ],
+      "groupby": ["crop", "category"]
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+  "encoding": {
+    "x": {
+      "field": "crop",
+      "type": "nominal",
+      "title": "Horticultural Crop",
+      "sort": "-y",
+      "axis": { "labelAngle": -40 }
+    },
+    "y": {
+      "field": "total_value",
+      "type": "quantitative",
+      "title": "Farm Gate Value ($M AUD)"
+    },
+    "color": {
+      "field": "dependency",
+      "type": "quantitative",
+      "title": "Pollination Dependency",
+      "scale": {
+        "scheme": "viridis",
+        "domain": [0.2, 1.0]
+      },
+      "legend": {
+        "orient": "right",
+        "format": ".0%",
+        "titleFontSize": 11,
+        "labelFontSize": 10
+      }
+    },
+    "tooltip": [
+      { "field": "crop", "type": "nominal", "title": "Crop" },
+      { "field": "category", "type": "nominal", "title": "Category" },
+      {
+        "field": "total_value",
+        "type": "quantitative",
+        "title": "Gross Value ($M)",
+        "format": "$,.1f"
+      },
+      {
+        "field": "dependency",
+        "type": "quantitative",
+        "title": "Insect Reliance",
+        "format": ".0%"
+      },
+      {
+        "field": "at_risk_value",
+        "type": "quantitative",
+        "title": "Pollination Attributable ($M)",
+        "format": "$,.1f"
+      }
+    ]
+  }
+}
